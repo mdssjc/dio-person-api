@@ -16,22 +16,22 @@ public class PersonUtils {
 
     public static PersonDTO createFakeDTO() {
         return PersonDTO.builder()
-                .firstName(FIRST_NAME)
-                .lastName(LAST_NAME)
-                .cpf(CPF_NUMBER)
-                .birthDate("04-04-2010")
-                .phones(Collections.singletonList(PhoneUtils.createFakeDTO()))
-                .build();
+                        .firstName(FIRST_NAME)
+                        .lastName(LAST_NAME)
+                        .cpf(CPF_NUMBER)
+                        .birthDate("04-04-2010")
+                        .phones(Collections.singletonList(PhoneUtils.createFakeDTO()))
+                        .build();
     }
 
     public static Person createFakeEntity() {
         return Person.builder()
-                .id(PERSON_ID)
-                .firstName(FIRST_NAME)
-                .lastName(LAST_NAME)
-                .cpf(CPF_NUMBER)
-                .birthDate(BIRTH_DATE)
-                .phones(Collections.singletonList(PhoneUtils.createFakeEntity()))
-                .build();
+                     .id(PERSON_ID)
+                     .firstName(FIRST_NAME)
+                     .lastName(LAST_NAME)
+                     .cpf(CPF_NUMBER)
+                     .birthDate(BIRTH_DATE)
+                     .phones(Collections.singletonList(PhoneUtils.createFakeEntity()))
+                     .build();
     }
 }

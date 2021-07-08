@@ -12,16 +12,16 @@ public class PhoneUtils {
 
     public static PhoneDTO createFakeDTO() {
         return PhoneDTO.builder()
-                .number(PHONE_NUMBER)
-                .type(PHONE_TYPE)
-                .build();
+                       .number(PHONE_NUMBER)
+                       .type(PHONE_TYPE)
+                       .build();
     }
 
     public static Phone createFakeEntity() {
         return Phone.builder()
-                .id(PHONE_ID)
-                .number(PHONE_NUMBER)
-                .type(PHONE_TYPE)
-                .build();
+                    .id(PHONE_ID)
+                    .number(PHONE_NUMBER)
+                    .type(PHONE_TYPE)
+                    .build();
     }
 }
