@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Regras de negócio para a entidade {@link Person}.
+ *
+ * @author Marcelo dos Santos
+ */
 @Service
 @RequiredArgsConstructor
 public class PersonService {

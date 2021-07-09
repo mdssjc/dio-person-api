@@ -6,6 +6,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * Tradutor entre a entidade {@link Person} e o modelo {@link PersonDTO}.
+ *
+ * @author Marcelo dos Santos
+ */
 @Mapper
 public interface PersonMapper {
 

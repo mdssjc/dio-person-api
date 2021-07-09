@@ -8,6 +8,11 @@ import one.digitalinnovation.personapi.enums.PhoneType;
 
 import javax.persistence.*;
 
+/**
+ * Representa a entidade Telefone no sistema.
+ *
+ * @author Marcelo dos Santos
+ */
 @Entity
 @Data
 @Builder

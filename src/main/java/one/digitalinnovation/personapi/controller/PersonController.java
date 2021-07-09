@@ -3,6 +3,7 @@ package one.digitalinnovation.personapi.controller;
 import lombok.RequiredArgsConstructor;
 import one.digitalinnovation.personapi.dto.request.PersonDTO;
 import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
+import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.exception.PersonNotFoundException;
 import one.digitalinnovation.personapi.service.PersonService;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Endpoints para o gerenciamento da entidade {@link Person}.
+ *
+ * @author Marcelo dos Santos
+ */
 @RestController
 @RequestMapping("/api/v1/people")
 @RequiredArgsConstructor

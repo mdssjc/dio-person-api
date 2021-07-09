@@ -9,6 +9,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Representa a entidade de Pessoa no sistema.
+ *
+ * @author Marcelo dos Santos
+ */
 @Entity
 @Data
 @Builder
