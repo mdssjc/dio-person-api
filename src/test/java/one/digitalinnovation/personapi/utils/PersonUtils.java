@@ -5,6 +5,9 @@ import one.digitalinnovation.personapi.entity.Person;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class PersonUtils {
 
@@ -33,5 +36,18 @@ public class PersonUtils {
                      .birthDate(BIRTH_DATE)
                      .phones(Collections.singletonList(PhoneUtils.createFakeEntity()))
                      .build();
+    }
+
+    public static List<Person> createFakeEntity(int amount) {
+        return LongStream.range(1, amount + 1)
+                         .mapToObj(id -> Person.builder()
+                                               .id(id)
+                                               .firstName(FIRST_NAME)
+                                               .lastName(LAST_NAME)
+                                               .cpf(CPF_NUMBER)
+                                               .birthDate(BIRTH_DATE)
+                                               .phones(Collections.singletonList(PhoneUtils.createFakeEntity()))
+                                               .build())
+                         .collect(Collectors.toList());
     }
 }
