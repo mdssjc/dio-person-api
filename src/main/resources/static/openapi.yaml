@@ -1,0 +1,159 @@
+openapi: 3.0.2
+info:
+  title: Person API
+  description: Endpoints para o gerenciamento de pessoas.
+  contact:
+    name: Marcelo dos Santos
+    url: https://marcelo-mds.dev
+  version: 1.0.0
+servers:
+  - url: /api/v1
+    description: base api
+tags:
+  - name: person
+    description: Operações para pessoas
+paths:
+  /people:
+    get:
+      tags:
+        - person
+      summary: Lista todas as pessoas
+      operationId: listAll
+      description: Lista todas as pessoas
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonDTO'
+    post:
+      tags:
+        - person
+      summary: Cria uma pessoa
+      operationId: createPerson
+      description: Cria uma pessoa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDTO'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponseDTO'
+  '/people/{id}':
+    get:
+      tags:
+        - person
+      summary: Busca a pessoa pelo id
+      operationId: findById
+      description: Busca a pessoa pelo id
+      parameters:
+        - $ref: "#/components/parameters/PersonId"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonDTO'
+    put:
+      tags:
+        - person
+      summary: Atualiza os dados da pessoa pelo id
+      operationId: updateById
+      description: Atualiza os dados da pessoa pelo id
+      parameters:
+        - $ref: "#/components/parameters/PersonId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResponseDTO'
+    delete:
+      tags:
+        - person
+      summary: Remove a pessoa pelo id
+      operationId: deleteById
+      description: Remove a pessoa pelo id
+      parameters:
+        - $ref: "#/components/parameters/PersonId"
+      responses:
+        '204':
+          description: No Content
+components:
+  parameters:
+    PersonId:
+      name: id
+      description: identificação
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  schemas:
+    PersonDTO:
+      required:
+        - cpf
+        - firstName
+        - lastName
+        - phones
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          maxLength: 100
+          minLength: 2
+          type: string
+        lastName:
+          maxLength: 100
+          minLength: 2
+          type: string
+        cpf:
+          type: string
+        birthDate:
+          type: string
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneDTO'
+    PhoneDTO:
+      required:
+        - number
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+            - HOME
+            - MOBILE
+            - COMMERCIAL
+        number:
+          maxLength: 14
+          minLength: 13
+          type: string
+    MessageResponseDTO:
+      type: object
+      properties:
+        message:
+          type: string
