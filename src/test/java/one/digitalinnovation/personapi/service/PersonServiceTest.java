@@ -17,10 +17,10 @@ import static one.digitalinnovation.personapi.utils.PersonUtils.createFakeDTO;
 import static one.digitalinnovation.personapi.utils.PersonUtils.createFakeEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doNothing;
 
 /**
  * Testes das regras de negócio de {@link Person}.
@@ -72,7 +72,7 @@ class PersonServiceTest {
 
         var returnedPersonDto = personService.findById(personId);
 
-        then(personRepository).should().findById(anyLong());
+        then(personRepository).should().findById(personId);
         assertThat(returnedPersonDto.getId()).isEqualTo(personId);
     }
 
@@ -93,15 +93,17 @@ class PersonServiceTest {
         var personId = 1L;
         var person = createFakeEntity();
         given(personRepository.findById(personId)).willReturn(Optional.of(person));
+        doNothing().when(personRepository).deleteById(personId);
 
         personService.delete(personId);
 
         then(personRepository).should().findById(personId);
+        then(personRepository).should().deleteById(personId);
     }
 
     @DisplayName("Delete - PersonNotFoundException")
     @Test
-    void test_given_person_id__when_not_found_then_throw_an_exception() {
+    void test_given_person_id_when_delete_not_found_then_throw_an_exception() {
         var personId = 1L;
         given(personRepository.findById(personId)).willReturn(Optional.empty());
 
@@ -129,7 +131,7 @@ class PersonServiceTest {
 
     @DisplayName("Update By Id - PersonNotFoundException")
     @Test
-    void test_given_person_id_and_person_dto__when_not_found_then_throw_an_exception() {
+    void test_given_person_id_and_person_dto_when_not_found_then_throw_an_exception() {
         var personId = 1L;
         given(personRepository.findById(personId)).willReturn(Optional.empty());
 
