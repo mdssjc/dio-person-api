@@ -1,6 +1,5 @@
 package one.digitalinnovation.personapi.service;
 
-import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.exception.PersonNotFoundException;
 import one.digitalinnovation.personapi.repository.PersonRepository;
@@ -13,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static one.digitalinnovation.personapi.utils.MessageResponseUtils.createExpectedMessageResponse;
+import static one.digitalinnovation.personapi.utils.MessageResponseUtils.updateExpectedMessageResponse;
 import static one.digitalinnovation.personapi.utils.PersonUtils.createFakeDTO;
 import static one.digitalinnovation.personapi.utils.PersonUtils.createFakeEntity;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -138,19 +139,5 @@ class PersonServiceTest {
         assertThrows(PersonNotFoundException.class, () -> personService.delete(personId));
 
         then(personRepository).should().findById(personId);
-    }
-
-    private MessageResponseDTO createExpectedMessageResponse(Long id) {
-        return MessageResponseDTO
-                .builder()
-                .message("Created person with ID " + id)
-                .build();
-    }
-
-    private MessageResponseDTO updateExpectedMessageResponse(Long id) {
-        return MessageResponseDTO
-                .builder()
-                .message("Updated person with ID " + id)
-                .build();
     }
 }
