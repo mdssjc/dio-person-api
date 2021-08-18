@@ -100,7 +100,6 @@ components:
   parameters:
     PersonId:
       name: id
-      description: identificação
       in: path
       required: true
       schema:
