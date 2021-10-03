@@ -9,5 +9,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Marcelo dos Santos
  */
 public interface PersonRepository extends JpaRepository<Person, Long> {
-
 }

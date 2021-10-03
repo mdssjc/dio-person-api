@@ -1,25 +1,25 @@
 package one.digitalinnovation.personapi.utils;
 
-import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
+import one.digitalinnovation.personapi.dto.response.MessageResponseDto;
 
 /**
- * Utilitário para criação de {@link MessageResponseDTO}.
+ * Utilitário para criação de {@link MessageResponseDto}.
  *
  * @author Marcelo dos Santos
  */
 public class MessageResponseUtils {
 
-    public static MessageResponseDTO createExpectedMessageResponse(Long id) {
-        return MessageResponseDTO
-                .builder()
-                .message("Created person with ID " + id)
-                .build();
-    }
+  public static MessageResponseDto createExpectedMessageResponse(Long id) {
+    return MessageResponseDto
+        .builder()
+        .message("Created person with ID " + id)
+        .build();
+  }
 
-    public static MessageResponseDTO updateExpectedMessageResponse(Long id) {
-        return MessageResponseDTO
-                .builder()
-                .message("Updated person with ID " + id)
-                .build();
-    }
+  public static MessageResponseDto updateExpectedMessageResponse(Long id) {
+    return MessageResponseDto
+        .builder()
+        .message("Updated person with ID " + id)
+        .build();
+  }
 }

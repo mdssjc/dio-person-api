@@ -31,113 +31,114 @@ import static org.mockito.Mockito.doNothing;
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {
 
-    @Mock
-    private PersonRepository personRepository;
+  @Mock
+  private PersonRepository personRepository;
 
-    @InjectMocks
-    private PersonService personService;
+  @InjectMocks
+  private PersonService personService;
 
-    @DisplayName("Create Person")
-    @Test
-    void test_given_person_dto_then_return_saved_message() {
-        var personDTO = createFakeDTO();
-        var expectedSavedPerson = createFakeEntity();
-        given(personRepository.save(any(Person.class))).willReturn(expectedSavedPerson);
+  @DisplayName("Create Person")
+  @Test
+  void test_given_person_dto_then_return_saved_message() {
+    var personDTO = createFakeDTO();
+    var expectedSavedPerson = createFakeEntity();
+    given(personRepository.save(any(Person.class))).willReturn(expectedSavedPerson);
 
-        var expectedSuccessMessage = createExpectedMessageResponse(expectedSavedPerson.getId());
-        var successMessage = personService.createPerson(personDTO);
+    var expectedSuccessMessage = createExpectedMessageResponse(expectedSavedPerson.getId());
+    var successMessage = personService.createPerson(personDTO);
 
-        then(personRepository).should().save(any(Person.class));
-        assertThat(successMessage).isEqualTo(expectedSuccessMessage);
-    }
+    then(personRepository).should().save(any(Person.class));
+    assertThat(successMessage).isEqualTo(expectedSuccessMessage);
+  }
 
-    @DisplayName("List All")
-    @Test
-    void test_return_person_dto_list() {
-        var expectedAmount = 3;
-        var person = createFakeEntity(expectedAmount);
-        given(personRepository.findAll()).willReturn(person);
+  @DisplayName("List All")
+  @Test
+  void test_return_person_dto_list() {
+    var expectedAmount = 3;
+    var person = createFakeEntity(expectedAmount);
+    given(personRepository.findAll()).willReturn(person);
 
-        var returnedPersonDtoList = personService.listAll();
+    var returnedPersonDtoList = personService.listAll();
 
-        then(personRepository).should().findAll();
-        assertThat(returnedPersonDtoList).hasSize(expectedAmount);
-    }
+    then(personRepository).should().findAll();
+    assertThat(returnedPersonDtoList).hasSize(expectedAmount);
+  }
 
-    @DisplayName("Find By Id")
-    @Test
-    void test_given_person_id_then_return_person_dto() throws PersonNotFoundException {
-        var personId = 1L;
-        var person = createFakeEntity();
-        given(personRepository.findById(personId)).willReturn(Optional.of(person));
+  @DisplayName("Find By Id")
+  @Test
+  void test_given_person_id_then_return_person_dto() throws PersonNotFoundException {
+    var personId = 1L;
+    var person = createFakeEntity();
+    given(personRepository.findById(personId)).willReturn(Optional.of(person));
 
-        var returnedPersonDto = personService.findById(personId);
+    var returnedPersonDto = personService.findById(personId);
 
-        then(personRepository).should().findById(personId);
-        assertThat(returnedPersonDto.getId()).isEqualTo(personId);
-    }
+    then(personRepository).should().findById(personId);
+    assertThat(returnedPersonDto.getId()).isEqualTo(personId);
+  }
 
-    @DisplayName("Find By Id - PersonNotFoundException")
-    @Test
-    void test_given_person_id_when_not_found_then_throw_an_exception() {
-        var personId = 1L;
-        given(personRepository.findById(personId)).willReturn(Optional.empty());
+  @DisplayName("Find By Id - PersonNotFoundException")
+  @Test
+  void test_given_person_id_when_not_found_then_throw_an_exception() {
+    var personId = 1L;
+    given(personRepository.findById(personId)).willReturn(Optional.empty());
 
-        assertThrows(PersonNotFoundException.class, () -> personService.findById(personId));
+    assertThrows(PersonNotFoundException.class, () -> personService.findById(personId));
 
-        then(personRepository).should().findById(personId);
-    }
+    then(personRepository).should().findById(personId);
+  }
 
-    @DisplayName("Delete")
-    @Test
-    void test_given_person_id_then_delete_that_person() throws PersonNotFoundException {
-        var personId = 1L;
-        var person = createFakeEntity();
-        given(personRepository.findById(personId)).willReturn(Optional.of(person));
-        doNothing().when(personRepository).deleteById(personId);
+  @DisplayName("Delete")
+  @Test
+  void test_given_person_id_then_delete_that_person() throws PersonNotFoundException {
+    var personId = 1L;
+    var person = createFakeEntity();
+    given(personRepository.findById(personId)).willReturn(Optional.of(person));
+    doNothing().when(personRepository).deleteById(personId);
 
-        personService.delete(personId);
+    personService.delete(personId);
 
-        then(personRepository).should().findById(personId);
-        then(personRepository).should().deleteById(personId);
-    }
+    then(personRepository).should().findById(personId);
+    then(personRepository).should().deleteById(personId);
+  }
 
-    @DisplayName("Delete - PersonNotFoundException")
-    @Test
-    void test_given_person_id_when_delete_not_found_then_throw_an_exception() {
-        var personId = 1L;
-        given(personRepository.findById(personId)).willReturn(Optional.empty());
+  @DisplayName("Delete - PersonNotFoundException")
+  @Test
+  void test_given_person_id_when_delete_not_found_then_throw_an_exception() {
+    var personId = 1L;
+    given(personRepository.findById(personId)).willReturn(Optional.empty());
 
-        assertThrows(PersonNotFoundException.class, () -> personService.delete(personId));
+    assertThrows(PersonNotFoundException.class, () -> personService.delete(personId));
 
-        then(personRepository).should().findById(personId);
-    }
+    then(personRepository).should().findById(personId);
+  }
 
-    @DisplayName("Update By Id")
-    @Test
-    void test_given_person_id_and_person_dto_then_return_updated_message() throws PersonNotFoundException {
-        var personId = 1L;
-        var personDTO = createFakeDTO();
-        var expectedSavedPerson = createFakeEntity();
-        given(personRepository.findById(personId)).willReturn(Optional.of(expectedSavedPerson));
-        given(personRepository.save(any(Person.class))).willReturn(expectedSavedPerson);
+  @DisplayName("Update By Id")
+  @Test
+  void test_given_person_id_and_person_dto_then_return_updated_message()
+      throws PersonNotFoundException {
+    var personId = 1L;
+    var personDTO = createFakeDTO();
+    var expectedSavedPerson = createFakeEntity();
+    given(personRepository.findById(personId)).willReturn(Optional.of(expectedSavedPerson));
+    given(personRepository.save(any(Person.class))).willReturn(expectedSavedPerson);
 
-        var expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedPerson.getId());
-        var successMessage = personService.updateById(personId, personDTO);
+    var expectedSuccessMessage = updateExpectedMessageResponse(expectedSavedPerson.getId());
+    var successMessage = personService.updateById(personId, personDTO);
 
-        then(personRepository).should().findById(personId);
-        then(personRepository).should().save(any(Person.class));
-        assertThat(successMessage).isEqualTo(expectedSuccessMessage);
-    }
+    then(personRepository).should().findById(personId);
+    then(personRepository).should().save(any(Person.class));
+    assertThat(successMessage).isEqualTo(expectedSuccessMessage);
+  }
 
-    @DisplayName("Update By Id - PersonNotFoundException")
-    @Test
-    void test_given_person_id_and_person_dto_when_not_found_then_throw_an_exception() {
-        var personId = 1L;
-        given(personRepository.findById(personId)).willReturn(Optional.empty());
+  @DisplayName("Update By Id - PersonNotFoundException")
+  @Test
+  void test_given_person_id_and_person_dto_when_not_found_then_throw_an_exception() {
+    var personId = 1L;
+    given(personRepository.findById(personId)).willReturn(Optional.empty());
 
-        assertThrows(PersonNotFoundException.class, () -> personService.delete(personId));
+    assertThrows(PersonNotFoundException.class, () -> personService.delete(personId));
 
-        then(personRepository).should().findById(personId);
-    }
+    then(personRepository).should().findById(personId);
+  }
 }
