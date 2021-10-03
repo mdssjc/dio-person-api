@@ -241,6 +241,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>one/digitalinnovation/personapi/dto/**</exclude>
+                        <exclude>one/digitalinnovation/personapi/mapper/*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
@@ -290,6 +296,9 @@
                 </dependencies>
                 <configuration>
                     <failWhenNoMutations>false</failWhenNoMutations>
+                    <excludedTestClasses>
+                        <testClass>one.digitalinnovation.personapi.PersonapiApplicationTests</testClass>
+                    </excludedTestClasses>
                 </configuration>
                 <executions>
                     <execution>
@@ -394,6 +403,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>one/digitalinnovation/personapi/dto/**</exclude>
+                        <exclude>one/digitalinnovation/personapi/mapper/*</exclude>
+                    </excludes>
+                </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -412,6 +427,10 @@
                         <sourceDataFormat>HTML</sourceDataFormat>
                         <sourceDataFormat>XML</sourceDataFormat>
                     </sourceDataFormats>
+                    <failWhenNoMutations>false</failWhenNoMutations>
+                    <excludedTestClasses>
+                        <testClass>one.digitalinnovation.personapi.PersonapiApplicationTests</testClass>
+                    </excludedTestClasses>
                 </configuration>
                 <reportSets>
                     <reportSet>
