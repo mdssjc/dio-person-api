@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Class name="one.digitalinnovation.personapi.controller.PersonController"/>
+        <Not>
+            <Bug code="EI_EXPOSE_REP2"/>
+        </Not>
+    </Match>
+
+    <Match>
+        <Class name="one.digitalinnovation.personapi.dto.request.PersonDto"/>
+        <Not>
+            <Bug code="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+        </Not>
+    </Match>
+
+    <Match>
+        <Class name="one.digitalinnovation.personapi.dto.request.PersonDto$PersonDtoBuilder"/>
+        <Not>
+            <Bug code="EI_EXPOSE_REP2"/>
+        </Not>
+    </Match>
+
+    <Match>
+        <Class name="one.digitalinnovation.personapi.entity.Person"/>
+        <Not>
+            <Bug code="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
+        </Not>
+    </Match>
+
+    <Match>
+        <Class name="one.digitalinnovation.personapi.entity.Person$PersonBuilder"/>
+        <Not>
+            <Bug code="EI_EXPOSE_REP2"/>
+        </Not>
+    </Match>
+</FindBugsFilter>
