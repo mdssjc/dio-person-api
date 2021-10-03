@@ -9,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import one.digitalinnovation.personapi.enums.PhoneType;
 
 /**
@@ -19,7 +20,8 @@ import one.digitalinnovation.personapi.enums.PhoneType;
  * @author Marcelo dos Santos
  */
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
